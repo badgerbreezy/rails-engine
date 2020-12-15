@@ -1,5 +1,4 @@
 require 'rails_helper'
-RAILS_ENV = 'test'
 
 describe "Items API" do
   it "can send a list of items" do
