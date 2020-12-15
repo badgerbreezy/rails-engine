@@ -8,7 +8,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     items = JSON.parse(response.body, symbolize_names: true)
-
+    
     expect(items.count).to eq(3)
 
     items.each do |item|
@@ -27,7 +27,6 @@ describe "Items API" do
       expect(item).to have_key(:merchant_id)
       expect(item[:merchant_id]).to be_an(Integer)
     end
-
   end
 
   it "can get one item by its id" do
