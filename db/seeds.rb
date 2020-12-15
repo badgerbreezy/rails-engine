@@ -17,16 +17,22 @@ puts "Loading PostgreSQL Data dump into local database with command:"
 puts cmd
 system(cmd)
 
-# csv_text = File.read(Rails.root.join("db", "data", "items.csv"))
-# csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
+csv_text = File.read(Rails.root.join("db", "data", "items.csv"))
+csv = CSV.parse(csv_text, :headers => true, :encoding => "ISO-8859-1")
+csv.each do |row|
+  t = Item.new
+  t.id = row['id'].to_i
+  t.name = row['name']
+  t.description = row['description']
+  t.unit_price = row['unit_price'].to_f / 100
+  t.merchant_id = row['merchant_id']
+  t.created_at = row['created_at']
+  t.updated_at = row['updated_at']
+  t.save
+end
+puts "There are now #{Item.count} rows in the items table"
 # csv.each do |row|
-#   t = Item.new
-#   t.name = row["name"]
-#   t.description = row["description"]
-#   t.unit_price = row["unit_price"]
-#   t.references :merchant, foreign_key: true
-#   t.created_at = row["created_at"]
-#   t.updated_at = row["updated_at"]
+#   Item.create!(row.to_hash)
 # end
 #
 # puts "There are now #{Item.count} rows in the transactions table"
