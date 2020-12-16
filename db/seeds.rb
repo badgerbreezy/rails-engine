@@ -8,10 +8,6 @@
 
 require 'csv'
 
-# before running "rake db:seed", do the following:
-# - put the "rails-engine-development.pgdump" file in db/data/
-# - put the "items.csv" file in db/data/
-
 cmd = "pg_restore --verbose --clean --no-acl --no-owner -h localhost -U $(whoami) -d rails-engine_development db/data/rails-engine-development.pgdump"
 puts "Loading PostgreSQL Data dump into local database with command:"
 puts cmd
@@ -31,22 +27,3 @@ csv.each do |row|
   t.save
 end
 puts "There are now #{Item.count} rows in the items table"
-# csv.each do |row|
-#   Item.create!(row.to_hash)
-# end
-#
-# puts "There are now #{Item.count} rows in the transactions table"
-
-# def import_csv_to_table(file_path, table_name)
-#   sql = "LOAD DATA LOCAL INFILE '#{file_path}'
-#   INTO TABLE '#{table_name}'
-#   FIELDS TERMINATED BY ','
-#   IGNORE 1 LINES;"
-#   ActiveRecord::Base.connection.execute(sql)
-# end
-#
-# import_csv_to_table("db/data/items.csv", "items")
-
-# TODO
-# - Import the CSV data into the Items table
-# - Add code to reset the primary key sequences on all 6 tables (merchants, items, customers, invoices, invoice_items, transactions)
