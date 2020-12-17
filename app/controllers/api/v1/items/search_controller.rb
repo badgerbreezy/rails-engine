@@ -23,7 +23,6 @@ class Api::V1::Items::SearchController < ApplicationController
       elsif key == "merchant_id"
         @items = Item.where("#{key} = ?", "#{value.to_i}")
       elsif key == "name" || key == "description"
-        # binding.pry
         @items = Item.where("lower(#{key}) like ?", "%#{value.downcase}%")
       else key == "created_at" || key == "updated_at"
         @items = Item.all.each do |item|
