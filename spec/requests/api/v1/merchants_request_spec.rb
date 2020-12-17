@@ -53,7 +53,7 @@ describe "Merchants API" do
     merchant_params = { name: "Cube Earth Society" }
     headers = {"CONTENT_TYPE" => "application/json"}
 
-    patch "/api/v1/merchants/#{id}", headers: headers, params: JSON.generate({merchant: merchant_params})
+    patch api_v1_merchant_path(id), headers: headers, params: JSON.generate(merchant_params)
     merchant = Merchant.find_by(id: id)
 
     expect(response).to be_successful

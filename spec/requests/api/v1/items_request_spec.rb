@@ -21,7 +21,7 @@ describe "Items API" do
       expect(item[:attributes][:description]).to be_a(String)
 
       expect(item[:attributes]).to have_key(:unit_price)
-      expect(item[:attributes][:unit_price]).to be_a(String)
+      expect(item[:attributes][:unit_price]).to be_a(Float)
 
       expect(item[:attributes]).to have_key(:merchant_id)
       expect(item[:attributes][:merchant_id]).to be_an(Integer)
@@ -45,7 +45,7 @@ describe "Items API" do
     expect(item[:data][:attributes][:description]).to be_a(String)
 
     expect(item[:data][:attributes]).to have_key(:unit_price)
-    expect(item[:data][:attributes][:unit_price]).to be_a(String)
+    expect(item[:data][:attributes][:unit_price]).to be_a(Float)
 
     expect(item[:data][:attributes]).to have_key(:merchant_id)
     expect(item[:data][:attributes][:merchant_id]).to be_an(Integer)
@@ -53,12 +53,12 @@ describe "Items API" do
 
   it "can create a new item" do
     merchant = create(:merchant, :with_items)
-    item_params = ({
+    item_params = {
       name: "Globe",
       description: "Round",
       unit_price: 60.60,
       merchant_id: merchant.id
-      })
+      }
     headers = {"CONTENT_TYPE" => "application/json"}
 
     post "/api/v1/items", headers: headers, params: JSON.generate(item_params)
@@ -74,10 +74,10 @@ describe "Items API" do
   it "can update an existing item" do
     id = create(:item).id
     previous_name = Item.last.name
-    item_params = { name: "Flat Earth Diorama" }
+    item_params = {name: "Flat Earth Diorama"}
     headers = {"CONTENT_TYPE" => "application/json"}
 
-    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate(item_params)
     item = Item.find_by(id: id)
 
     expect(response).to be_successful
