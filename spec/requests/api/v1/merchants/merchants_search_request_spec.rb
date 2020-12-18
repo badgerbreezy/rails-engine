@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 describe "Merchants API" do
+  before :each do
+    create_list(:merchant, 3, :with_items)
+    @merchant_1 = Merchant.first
+    @merchant_2 = Merchant.last
+  end
+
   it "can search for a single merchant" do
-    create_list(:merchant, 2, :with_items)
-    merchant_1 = Merchant.first
-    merchant_2 = Merchant.last
     merchant_params = ({
       name: Merchant.first.name,
       })
@@ -12,8 +15,8 @@ describe "Merchants API" do
     get "/api/v1/merchants/find?name=#{merchant_params[:name]}"
     merchant = JSON.parse(response.body, symbolize_names: true)
     expect(response).to be_successful
-    expect(merchant[:data][:attributes][:name]).to eq(merchant_1.name)
-    expect(merchant[:data][:attributes][:name]).to_not eq(merchant_2.name)
+    expect(merchant[:data][:attributes][:name]).to eq(@merchant_1.name)
+    expect(merchant[:data][:attributes][:name]).to_not eq(@merchant_2.name)
   end
 
   it "can search for multiple merchants" do
@@ -43,11 +46,8 @@ describe "Merchants API" do
   end
 
   it "can search merchants by creation date" do
-    create_list(:merchant, 3)
-    merchant_1 = Merchant.first
-    merchant_2 = Merchant.last
     merchant_params = ({
-      created_at: merchant_1.created_at
+      created_at: @merchant_1.created_at
       })
     headers = {"CONTENT_TYPE" => "application/json"}
     get "/api/v1/merchants/find_all?created_at=#{merchant_params[:created_at]}"
@@ -55,14 +55,12 @@ describe "Merchants API" do
 
     expect(response).to be_successful
     expect(merchants[:data].count).to eq(3)
-    expect(merchants[:data][0][:attributes][:name]).to eq(merchant_1.name)
+    expect(merchants[:data][0][:attributes][:name]).to eq(@merchant_1.name)
   end
 
   it "can search merchants by date updated" do
-    create_list(:merchant, 3)
-    merchant_1 = Merchant.first
     merchant_params = ({
-      updated_at: merchant_1.updated_at
+      updated_at: @merchant_1.updated_at
       })
     headers = {"CONTENT_TYPE" => "application/json"}
     get "/api/v1/merchants/find_all?updated_at=#{merchant_params[:updated_at]}"
@@ -70,22 +68,19 @@ describe "Merchants API" do
 
     expect(response).to be_successful
     expect(merchants[:data].count).to eq(3)
-    expect(merchants[:data][0][:attributes][:name]).to eq(merchant_1.name)
+    expect(merchants[:data][0][:attributes][:name]).to eq(@merchant_1.name)
   end
 
   it "can find a single merchant by creation date " do
-    create_list(:merchant, 2)
-    merchant_1 = Merchant.first
-    merchant_2 = Merchant.last
     merchant_params = ({
-      created_at: merchant_1.created_at
+      created_at: @merchant_1.created_at
       })
     headers = {"CONTENT_TYPE" => "application/json"}
     get "/api/v1/merchants/find?created_at=#{merchant_params[:created_at]}"
     merchant = JSON.parse(response.body, symbolize_names: true)
 
     expect(response).to be_successful
-    expect(merchant[:data][:attributes][:name]).to eq(merchant_1.name)
-    expect(merchant[:data][:attributes][:name]).to_not eq(merchant_2.name)
+    expect(merchant[:data][:attributes][:name]).to eq(@merchant_1.name)
+    expect(merchant[:data][:attributes][:name]).to_not eq(@merchant_2.name)
   end
 end
