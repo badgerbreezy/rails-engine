@@ -8,7 +8,7 @@ class Merchant < ApplicationRecord
     select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
       .joins(invoices: [:invoice_items, :transactions])
       .merge(Transaction.successful)
-      .where(invoices: {status: 'shipped'})
+      .merge(Invoice.shipped)
       .group(:id)
       .order("revenue desc")
       .limit(limit)
@@ -18,7 +18,7 @@ class Merchant < ApplicationRecord
     select("merchants.*, SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
     .joins(invoices: [:invoice_items, :transactions])
     .merge(Transaction.successful)
-    .where(invoices: {status: 'shipped'})
+    .merge(Invoice.shipped)
     .where(id: id)
     .group(:id)
     .first
@@ -28,7 +28,7 @@ class Merchant < ApplicationRecord
     select("merchants.*, SUM(invoice_items.quantity) AS revenue")
       .joins(invoices: [:invoice_items, :transactions])
       .merge(Transaction.successful)
-      .where(invoices: {status: 'shipped'})
+      .merge(Invoice.shipped)
       .group(:id)
       .order("revenue desc")
       .limit(quantity)
@@ -40,7 +40,7 @@ class Merchant < ApplicationRecord
     Invoice.select("SUM(invoice_items.quantity * invoice_items.unit_price) AS revenue")
       .joins(:invoice_items, :transactions)
       .merge(Transaction.successful)
-      .where(invoices: { status: 'shipped' })
+      .merge(Invoice.shipped)
       .where(invoices: { created_at: start_date..end_date })[0]
   end
 end
