@@ -65,4 +65,4 @@ The Rails Engine works in conjunction with the [The Turing Rails Driver](https:/
 
 ## Schema Design
 
-![image](https://user-images.githubusercontent.com/67594471/102608602-59042900-40e7-11eb-80a6-355af2db7e41.png)
+![Screen Shot 2020-12-18 at 4 17 49 AM](https://user-images.githubusercontent.com/67594471/102609301-78e81c80-40e8-11eb-8b35-0d9e21b8da12.png)
