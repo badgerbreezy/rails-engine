@@ -3,8 +3,8 @@ require 'rails_helper'
 describe "Items API" do
   it "can send a list of items" do
     create_list(:item, 3)
-    get '/api/v1/items'
 
+    get '/api/v1/items'
     expect(response).to be_successful
 
     items = JSON.parse(response.body, symbolize_names: true)
@@ -32,7 +32,6 @@ describe "Items API" do
     id = create(:item).id
     get "/api/v1/items/#{id}"
     item = JSON.parse(response.body, symbolize_names: true)
-
     expect(response).to be_successful
 
     expect(item[:data]).to have_key(:id)
