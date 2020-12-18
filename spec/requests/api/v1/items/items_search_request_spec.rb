@@ -60,7 +60,6 @@ describe "Items API" do
 
     expect(response).to be_successful
     expect(item[:data]).to have_key(:id)
-    binding.pry
     expect(item[:data][:attributes][:merchant_id]).to eq(@item_params[:merchant_id])
   end
 

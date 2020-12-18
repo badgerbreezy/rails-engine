@@ -33,6 +33,4 @@ class Merchant < ApplicationRecord
       .order("revenue desc")
       .limit(quantity)
   end
-
-
 end
