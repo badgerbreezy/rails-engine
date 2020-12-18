@@ -33,7 +33,7 @@ The Rails Engine works in conjunction with the [The Turing Rails Driver](https:/
 7. Fork and clone the [Rails Driver here](https://github.com/turingschool-examples/rails_driver) into the local folder
 8. Open one terminal window for rails-engine and run `rails s`
 9. While the window is open, create a new tab or open a new window for rails_driver and run `rails s -p 3001` simultaneously 
-10. Visit [localhost:3000/merchants](http://localhost:3000/merchants) to see the app in action
+10. Visit [localhost:3001](http://localhost:3001) to see the app in action
 11. Run `bundle exec rspec` from rails_driver to see the spec harness; there should be 18 passing tests
 12. Run `bundle exec rspec` from the rails-engine to see the test suite; there should be 60 passing tests
 
@@ -61,8 +61,8 @@ The Rails Engine works in conjunction with the [The Turing Rails Driver](https:/
 
 ## Statistics
 
-   ![](https://img.shields.io/badge/Rails-5.2.4-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a) ![](https://img.shields.io/badge/Code-Ruby-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)   ![](https://img.shields.io/badge/Code-HTML-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a) ![](https://img.shields.io/badge/Code-CSS-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
+   ![](https://img.shields.io/badge/Rails-5.2.4-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a) ![](https://img.shields.io/badge/Code-Ruby-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)   ![](https://img.shields.io/badge/Code-SQL-informational?style=flat&logo=<LOGO_NAME>&logoColor=white&color=2bbc8a)
 
 ## Schema Design
 
-![image](https://user-images.githubusercontent.com/67594471/101731065-4d29be80-3a78-11eb-8e1e-ce28283ce6e6.png)
+![image](https://user-images.githubusercontent.com/67594471/102608602-59042900-40e7-11eb-80a6-355af2db7e41.png)
