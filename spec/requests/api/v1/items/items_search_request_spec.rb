@@ -43,6 +43,27 @@ describe "Items API" do
     expect(item[:data][:attributes][:name]).to_not eq(@item_2.name)
   end
 
+  it "can search a single item by price" do
+    headers = {"CONTENT_TYPE" => "application/json"}
+    get "/api/v1/items/find?unit_price=#{@item_params[:unit_price]}"
+    item = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(item[:data]).to have_key(:id)
+    expect(item[:data][:attributes][:unit_price]).to eq(@item_params[:unit_price].to_f)
+  end
+
+  it "can search a single item by merchant id" do
+    headers = {"CONTENT_TYPE" => "application/json"}
+    get "/api/v1/items/find?merchant_id=#{@item_params[:merchant_id]}"
+    item = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+    expect(item[:data]).to have_key(:id)
+    binding.pry
+    expect(item[:data][:attributes][:merchant_id]).to eq(@item_params[:merchant_id])
+  end
+
   it "can search a single item by description" do
     item_params = ({
       description: "EarTh"
@@ -90,6 +111,7 @@ describe "Items API" do
 
     expect(response).to be_successful
     expect(item[:data].count).to eq(1)
+    expect(item[:data][0]).to have_key(:id)
     expect(item[:data][0][:attributes][:unit_price]).to eq(@item_params[:unit_price].to_f)
   end
 
